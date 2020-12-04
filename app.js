@@ -5,6 +5,13 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
   .then((data) => {
     // Work with JSON data here
     console.log(data)
+
+    for (var i = 0; i < data.sol_keys.length; i++) {
+        console.log(data.sol_keys[i]) // date
+        var temp = data.sol_keys[i]
+        console.log(data[temp].First_UTC) // start time on Earth
+    }
+
   })
   .catch((err) => {
     // Do something for an error here
