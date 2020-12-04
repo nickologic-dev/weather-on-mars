@@ -17,3 +17,9 @@
   min-width: 50%;
   min-height: 50%;
 }
+
+.main {
+    position: absolute;
+    margin: 0px;
+    color: aliceblue;
+}
