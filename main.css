@@ -37,3 +37,7 @@
   float: right;
   padding-left: 30px;
 }
+
+#p .tab_id {
+  visibility: hidden;
+}

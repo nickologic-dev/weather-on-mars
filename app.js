@@ -13,14 +13,10 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
     for (var i = 0; i < data.sol_keys.length; i++) {
       var solBtn = document.createElement("button");
       solBtn.classList.add("tabs");
-      solBtn.id = i;
-      solBtn.onclick = function(event) {
-        selected = data.sol_keys[solBtn.id];
-        assignData(selected, data);
-      }
 
       var solName = document.createElement("h2");
       solName.innerHTML = "Sol " + data.sol_keys[i];
+      solName.id = "sol_name"
       solBtn.append(solName);
 
       var solStartDate = document.createElement("h3");
@@ -30,6 +26,11 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
       var solEndDate = document.createElement("h3");
       solEndDate.innerHTML = "Day End: " + data[data.sol_keys[i]].Last_UTC;
       solBtn.appendChild(solEndDate);
+
+      solBtn.onclick = function(event) {
+        selected = Number(this.firstChild.innerHTML.substring(4, 7)); 
+        assignData(selected, data);
+      }
 
       document.getElementById("sol_tabs").appendChild(solBtn);
     }
