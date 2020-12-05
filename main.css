@@ -23,3 +23,9 @@
     margin: 0px;
     color: aliceblue;
 }
+
+
+.tabs {
+  display: block;
+  clear: both;
+}
