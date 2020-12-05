@@ -24,8 +24,16 @@
     color: aliceblue;
 }
 
+#sol_tabs {
+  float: left;
+}
 
 .tabs {
   display: block;
   clear: both;
+}
+
+.info {
+  float: right;
+  padding-left: 30px;
 }
