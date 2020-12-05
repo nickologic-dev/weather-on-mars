@@ -26,6 +26,7 @@
 
 #sol_tabs {
   float: left;
+  width: 30%;
 }
 
 .tabs {
@@ -35,11 +36,12 @@
 
 .info {
   float: right;
-  padding-left: 30px;
+  padding-left: 5%;
+  width: 65%;
 }
 
-#p .tab_id {
-  visibility: hidden;
+#sol_title {
+  text-align: center;
 }
 
 .pie {

@@ -6,25 +6,27 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
   .then((data) => {
     console.log(data);
 
-    var current = data.sol_keys[data.sol_keys.length - 1];
+    var length = data.sol_keys.length - 1
+    var current = data.sol_keys[length];
 
     var selected = current
 
+    //create tab buttons
     for (var i = 0; i < data.sol_keys.length; i++) {
       var solBtn = document.createElement("button");
       solBtn.classList.add("tabs");
 
       var solName = document.createElement("h2");
-      solName.innerHTML = "Sol " + data.sol_keys[i];
+      solName.innerHTML = "Sol " + data.sol_keys[length-i];
       solName.id = "sol_name"
       solBtn.append(solName);
 
       var solStartDate = document.createElement("h3");
-      solStartDate.innerHTML = "Day Start: " + data[data.sol_keys[i]].First_UTC;
+      solStartDate.innerHTML = "Day Start: " + data[data.sol_keys[length-i]].First_UTC;
       solBtn.appendChild(solStartDate);
 
       var solEndDate = document.createElement("h3");
-      solEndDate.innerHTML = "Day End: " + data[data.sol_keys[i]].Last_UTC;
+      solEndDate.innerHTML = "Day End: " + data[data.sol_keys[length-i]].Last_UTC;
       solBtn.appendChild(solEndDate);
 
       solBtn.onclick = function(event) {
@@ -37,6 +39,7 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
 
     assignData(selected, data)
 
+    //create wind diagram
     for (var i = 0; i < 16; i++) {
       var newDiv = document.createElement("div");
       var classAtt = document.createAttribute("class");
@@ -54,7 +57,6 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
   })
 
   function assignData(selected, data) {
-    console.log(selected)
     document.getElementById("sol_title").innerHTML = "Sol # " + selected
     document.getElementById("season").innerHTML = "Season: " + data[selected].Season 
     document.getElementById("day_start").innerHTML = "Day Start: " + data[selected].First_UTC
