@@ -37,6 +37,17 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
 
     assignData(selected, data)
 
+    for (var i = 0; i < 16; i++) {
+      var newDiv = document.createElement("div");
+      var classAtt = document.createAttribute("class");
+      var styleAtt = document.createAttribute("style");
+      classAtt.value = "pie_segment";
+      styleAtt.value = "--offset: " + (3.125 + (i * 6.25)) + "; --value: " + 6.25 + ";"
+      newDiv.setAttributeNode(classAtt);
+      newDiv.setAttributeNode(styleAtt);
+      document.getElementById("wind").appendChild(newDiv);
+    }
+
   })
   .catch((err) => {
     // Do something for an error here

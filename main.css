@@ -41,3 +41,36 @@
 #p .tab_id {
   visibility: hidden;
 }
+
+.pie {
+  position: relative;
+  margin: 50px 50px 50px 50px;
+  float: right;
+  overflow: hidden;
+  background: wheat;
+  border-radius: 100%;
+  height: calc(var(--size, 500) * 1px);
+  width: calc(var(--size, 500) * 1px);
+}
+
+.pie_segment {
+  --degrees: calc((var(--offset) / 100) * 360);
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #000;
+  height: 100%;
+  width: 100%;
+  transform-origin: 50% 100%;
+  transform: translate(0, -50%) rotate(90deg) rotate(calc(var(--degrees) * 1deg));
+}
+
+.pie_segment::before {
+  --degrees: calc((var(--value) / 100) * 360);
+  position: absolute;
+  background: var(--bg);
+  content: '';
+  height: 100%;
+  width: 100%;
+  transform-origin: 50% 0;
+  transform: translate(0, 100%) rotate(calc(var(--degrees) * 1deg));
+}
