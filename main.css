@@ -32,6 +32,7 @@
 .tabs {
   display: block;
   clear: both;
+  cursor: pointer;
 }
 
 .info {
