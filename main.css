@@ -44,22 +44,49 @@
   text-align: center;
 }
 
-.pie {
+.wind_chart {
   position: relative;
-  margin: 50px 50px 50px 50px;
-  float: right;
+  margin: 50px 30px;
+  border-radius: 100%;
+  border: 2px solid black;
+  height: calc(var(--size, 500) * 1px);
+  width: calc(var(--size, 500) * 1px);
+}
+
+.pie {
+  --pieSize: calc(var(--size) - 50);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
   overflow: hidden;
   background: wheat;
   border-radius: 100%;
-  height: calc(var(--size, 500) * 1px);
-  width: calc(var(--size, 500) * 1px);
+  height: calc(var(--pieSize, 450) * 1px);
+  width: calc(var(--pieSize, 450) * 1px);
+}
+
+.ct_pie {
+  --ctPieSize: calc((var(--ctSize) / 50000) * (var(--size) - 50));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  margin: auto;
+  overflow: hidden;
+  border-radius: 100%;
+  height: calc(var(--ctPieSize) * 1px);
+  width: calc(var(--ctPieSize) * 1px);
+}
+
+.pie .pie_segment {
+  box-shadow: 0 0 0 0.4px black;
 }
 
 .pie_segment {
   --degrees: calc((var(--offset) / 100) * 360);
   position: absolute;
   overflow: hidden;
-  border: 1px solid #000;
   height: 100%;
   width: 100%;
   transform-origin: 50% 100%;
@@ -75,4 +102,19 @@
   width: 100%;
   transform-origin: 50% 0;
   transform: translate(0, 100%) rotate(calc(var(--degrees) * 1deg));
+}
+
+.direction_name {
+  --xMove: calc(var(--x) * var(--size) / 2);
+  --yMove: calc(var(--y) * var(--size) / 2);
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  height: 30px;
+  width: 30px;
+  background: black;
+  transform-origin: 0%;
+  transform: translate(calc(var(--xMove) * 1px), calc(var(--yMove) * 1px)) translateY(-50%) translateX(-50%);
 }
