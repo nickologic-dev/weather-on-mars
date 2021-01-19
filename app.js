@@ -22,11 +22,11 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
       solBtn.append(solName);
 
       var solStartDate = document.createElement("h3");
-      solStartDate.innerHTML = "Day Start: " + data[data.sol_keys[length-i]].First_UTC;
+      solStartDate.innerHTML = "Day Start: " + dateFormat(data[data.sol_keys[length-i]].First_UTC);
       solBtn.appendChild(solStartDate);
 
       var solEndDate = document.createElement("h3");
-      solEndDate.innerHTML = "Day End: " + data[data.sol_keys[length-i]].Last_UTC;
+      solEndDate.innerHTML = "Day End: " + dateFormat(data[data.sol_keys[length-i]].Last_UTC);
       solBtn.appendChild(solEndDate);
 
       solBtn.onclick = function(event) {
@@ -72,14 +72,28 @@ fetch('https://api.nasa.gov/insight_weather/?api_key=rSeiuzYdFB4Uhvgqt2HuCaIL4dI
     // Do something for an error here
   })
 
+  function dateFormat(day, data) {
+    var date = day.split("-")
+    if (date.length == 3) {
+      return date[1] + "/" + date[2].split("T")[0] + "/" + date[0] + " " + date[2].split("T")[1].split("Z")[0]
+    }
+    return day
+  }
+
   function assignData(selected, data) {
     document.getElementById("sol_title").innerHTML = "Sol # " + selected
-    document.getElementById("season").innerHTML = "Season: " + data[selected].Season 
-    document.getElementById("day_start").innerHTML = "Day Start: " + data[selected].First_UTC
-    document.getElementById("day_end").innerHTML = "Day End: " + data[selected].Last_UTC 
-    document.getElementById("pre_avg").innerHTML = "Avg: " + data[selected].PRE.av + " Pa" 
-    document.getElementById("pre_high").innerHTML = "High: " + data[selected].PRE.mx + " Pa" 
-    document.getElementById("pre_low").innerHTML = "Low: " + data[selected].PRE.mn + " Pa"
+    document.getElementById("season").innerHTML = "Season: " + data[selected].Season.charAt(0).toUpperCase() + data[selected].Season.slice(1) 
+    document.getElementById("day_start").innerHTML = "Day Start: " + dateFormat(data[selected].First_UTC)
+    document.getElementById("day_end").innerHTML = "Day End: " + dateFormat(data[selected].Last_UTC)
+    
+    document.getElementById("pre_avg").innerHTML = "Avg Pressure: " + data[selected].PRE.av + " Pa" 
+    document.getElementById("pre_high").innerHTML = "High Pressure: " + data[selected].PRE.mx + " Pa" 
+    document.getElementById("pre_low").innerHTML = "Low Pressure: " + data[selected].PRE.mn + " Pa"
+    
+    document.getElementById("temp_avg").innerHTML = "Avg Temperature: " + data[selected].AT.av + " C" 
+    document.getElementById("temp_high").innerHTML = "High Temperature: " + data[selected].AT.mx + " C" 
+    document.getElementById("temp_low").innerHTML = "Low Temperature: " + data[selected].AT.mn + " C"
+    
     for (i = 0; i < 16; i++) {
       if (data[selected].WD[i] != null) {
         document.getElementById("direction_" + [i+1].toString()).setAttribute(
